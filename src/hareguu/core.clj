@@ -1,5 +1,6 @@
 (ns hareguu.core
-  (:use [compojure.core]
+  (:use [미생.기본]
+        [compojure.core]
         [hareguu.layout])
   (:require [clojure.java.io :as io]
             [clojure.string :as s]
@@ -112,7 +113,4 @@
   "build the site"
   [& args]
   (let [src-dir "content"]
-    (doseq [f (filter
-               (memfn isFile)
-               (file-seq (io/file src-dir)))]
-      (generate-file f))))
+    (run! generate-file (filter (memfn isFile) (file-seq (io/file src-dir))))))
